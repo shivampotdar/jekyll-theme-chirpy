@@ -19,7 +19,6 @@ description: >-                        # used by seo meta and the atom feed
 # Replace with the website url, e.g. 'https://username.github.io'
 
 url: 'https://shivampotdar.me'
-baseurl: '/jekyll-theme-chirpy'
 
 author: Shivam Potdar                  # change to your full name
 
@@ -49,13 +48,13 @@ google_site_verification: google_meta_tag_verification # change to your verifica
 
 # Only if your site type is GitHub Project sites and doesn't have a custom domain,
 # change below value to '/projectname'.
-baseurl: ''
+baseurl: '/jekyll-theme-chirpy'
 
 # Change to your timezone › http://www.timezoneconverter.com/cgi-bin/findzone/findzone
 timezone: Asia/Kolkata
 
 google_analytics:
-  id: ''          # Fill with your Google Analytics ID
+  id: 'UA-165884310-1'          # Fill with your Google Analytics ID
   pv:
     # The Google Analytics pageviews switch.
     # DO NOT enable it unless you know how to deploy the Google Analytics superProxy.
