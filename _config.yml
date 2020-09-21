@@ -30,6 +30,8 @@ github:
 twitter:
   username: shivampotdar99            # change to your twitter username
 
+image: /assets/img/sample/avatar.jpg
+
 social:
   name: Shivam Potdar                  # it will shows as the copyright owner in Footer
   email: shivampotdar99@gmail.com             # change to your email address
