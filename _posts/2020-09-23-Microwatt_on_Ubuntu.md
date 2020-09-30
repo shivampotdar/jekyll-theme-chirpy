@@ -2,7 +2,7 @@
 title: Running Microwatt on Ubuntu 20.04
 date: 2020-09-23 18:33 +0530
 categories: [cpus]
-tags: [spus, softcores, powerpc]
+tags: [cpus, softcores, powerpc]
 image: /assets/img/blogs/uwatt/microwatt-title.png
 ---
 
