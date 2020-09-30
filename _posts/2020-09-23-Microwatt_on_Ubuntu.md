@@ -24,7 +24,7 @@ It is also supported in [FuseSoC](https://github.com/olofk/fusesoc) for quick si
 
 - It does have pointers to what you need to set up on non-POWER (say x86) systems to get it running, you would still need some digging around.
 
-- I was able to successfully get simualations running on Ubuntu 20.04 and decided to list down the steps here:
+- I was able to successfully get simulations running on Ubuntu 20.04 and decided to list down the steps here:
     1.  Make a new directory wherever you like -- `mkdir /home/$USER/uwatt`
    
     2.  Download PowerPC cross toolchain
@@ -97,11 +97,11 @@ It is also supported in [FuseSoC](https://github.com/olofk/fusesoc) for quick si
     8. (Optional) Run bare-metal C code on Microwatt!
     By this method, you can write simple C test programs and check their operation. This is achieved by compiling them using the GCC cross-compiler. 
         a. I have made changes to the Makefile in hello_world directory to allow any filename and linking main_ram.bin with compiled binary in single step. First try running the existing hello_world example.
-            ```bash
-              cd ~/uwatt/microwatt/hello_world
-              wget https://pastebin.com/raw/2WdH5Z4d -O Makefile
-              make
-            ```
+        ```bash
+        cd ~/uwatt/microwatt/hello_world
+        wget https://pastebin.com/raw/2WdH5Z4d -O Makefile
+        make
+        ```
 
         b. Try `cd ..` and `./core_tb > /dev/null` and you would be greeted by Microwatt :)
         ```
