@@ -83,16 +83,16 @@ It is also supported in [FuseSoC](https://github.com/olofk/fusesoc) for quick si
     (note that here we are using pre-built image inside microwatt repository. At least on my system, I am not able to provide inputs to the micropython terminal with the image built above.
     This issue has been reported on microwatt GitHub - https://github.com/antonblanchard/microwatt/issues/246)
 
-    ```bash
-         ln -s micropython/firmware.bin main_ram.bin
-    ```
+        ```bash
+        ln -s micropython/firmware.bin main_ram.bin
+        ```
 
     7. Run Microwatt!
     (By sending output logs to /dev/null, you can also specify a file name if needed)
-    ```bash
-    ./core_tb > /dev/null
-    ```
-    Note that this is similar to running a Python interpreter shell on your local system, but here the execution is through simulation mechanism.
+        ```bash
+        ./core_tb > /dev/null
+        ```
+        Note that this is similar to running a Python interpreter shell on your local system, but here the execution is through simulation mechanism.
 
     8. (Optional) Run bare-metal C code on Microwatt!
     By this method, you can write simple C test programs and check their operation. This is achieved by compiling them using the GCC cross-compiler. 
