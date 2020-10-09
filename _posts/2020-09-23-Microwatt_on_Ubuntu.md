@@ -25,9 +25,11 @@ It is also supported in [FuseSoC](https://github.com/olofk/fusesoc) for quick si
 - It does have pointers to what you need to set up on non-POWER (say x86) systems to get it running, you would still need some digging around.
 
 - I was able to successfully get simulations running on Ubuntu 20.04 and decided to list down the steps here:
-    1.  Make a new directory wherever you like -- `mkdir /home/$USER/uwatt`
-   
-    2.  Download PowerPC cross toolchain
+    1.  Make a new directory wherever you like --  ```bash
+        mkdir /home/$USER/uwatt
+        cd ~/uwatt
+        ```
+    3.  Download PowerPC cross toolchain
         - You can select `powerpc64le-power8` and `glibc` on toolchains.bootlin.com or 
         get the stable version as of date directly with
         ```bash 
@@ -37,17 +39,17 @@ It is also supported in [FuseSoC](https://github.com/olofk/fusesoc) for quick si
 
         - Since this is a prebuilt toolchain, all you need to use it is 
         ```bash
-        export PATH=$PATH:/home/$USER/uwatt/powerpc64le-power8--glibc--stable-2020.02-2.tar.bz2
-        export CROSS_COMPILE=powerpc64le-linux
+        export PATH=$PATH:/home/$USER/uwatt/powerpc64le-power8--glibc--stable-2020.02-2/bin
+        export CROSS_COMPILE=powerpc64le-linux-
         ```
-    3. Build Micropython
+    4. Build Micropython
        ```bash
         git clone https://github.com/micropython/micropython.git
         cd micropython/ports/powerpc
         make -j$(nproc)
         cd ../../../
        ```
-    4. Build GHDL from source
+    5. Build GHDL from source
        - Check if you have llvm installed with `which llvm-config`. 
        If you see "... not found", install with `bash -c "$(wget -O - https://apt.llvm.org/llvm.sh)"`
        - Install gnat4.9 packages (needed by GHDL): 
@@ -73,14 +75,14 @@ It is also supported in [FuseSoC](https://github.com/olofk/fusesoc) for quick si
        export PATH=$PATH:/home/$USER/ghdl_build/bin
        ```
 
-    5. Build Microwatt
+    6. Build Microwatt
        ```bash
         git clone https://github.com/antonblanchard/microwatt
         cd microwatt
         make
        ```
 
-    6. Link Micropython image
+    7. Link Micropython image
     (note that here we are using pre-built image inside microwatt repository. At least on my system, I am not able to provide inputs to the micropython terminal with the image built above.
     This issue has been reported on microwatt GitHub - https://github.com/antonblanchard/microwatt/issues/246)
 
@@ -88,14 +90,14 @@ It is also supported in [FuseSoC](https://github.com/olofk/fusesoc) for quick si
         ln -s micropython/firmware.bin main_ram.bin
         ```
 
-    7. Run Microwatt!
+    1. Run Microwatt!
     (By sending output logs to /dev/null, you can also specify a file name if needed)
         ```bash
         ./core_tb > /dev/null
         ```
         Note that this is similar to running a Python interpreter shell on your local system, but here the execution is through simulation mechanism.
 
-    8. (Optional) Run bare-metal C code on Microwatt!
+    1. (Optional) Run bare-metal C code on Microwatt!
     By this method, you can write simple C test programs and check their operation. This is achieved by compiling them using the GCC cross-compiler. 
         a. I have made changes to the Makefile in hello_world directory to allow any filename and linking main_ram.bin with compiled binary in single step. First try running the existing hello_world example.
         ```bash
