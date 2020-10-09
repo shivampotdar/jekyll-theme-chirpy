@@ -32,6 +32,7 @@ It is also supported in [FuseSoC](https://github.com/olofk/fusesoc) for quick si
         get the stable version as of date directly with
         ```bash 
         wget https://toolchains.bootlin.com/downloads/releases/toolchains/powerpc64le-power8/tarballs/powerpc64le-power8--glibc--stable-2020.02-2.tar.bz2
+        tar -xvf powerpc64le-power8--glibc--stable-2020.02-2.tar.bz2
         ```
 
         - Since this is a prebuilt toolchain, all you need to use it is 
