@@ -25,11 +25,14 @@ It is also supported in [FuseSoC](https://github.com/olofk/fusesoc) for quick si
 - It does have pointers to what you need to set up on non-POWER (say x86) systems to get it running, you would still need some digging around.
 
 - I was able to successfully get simulations running on Ubuntu 20.04 and decided to list down the steps here:
-    1.  Make a new directory wherever you like --  ```bash
-        mkdir /home/$USER/uwatt
-        cd ~/uwatt
-        ```
-    3.  Download PowerPC cross toolchain
+- I also made ans ASCII cinema for this process - which completes this whole process in 8 mins! - https://asciinema.org/a/364414
+- (Note that if you are on a different Ubuntu release, there might be small changes needed here and there)
+    Make a new directory wherever you like 
+    ```bash
+    mkdir /home/$USER/uwatt
+    cd /home/$USER/uwatt
+    ```
+    1.  Download PowerPC cross toolchain
         - You can select `powerpc64le-power8` and `glibc` on toolchains.bootlin.com or 
         get the stable version as of date directly with
         ```bash 
@@ -42,16 +45,19 @@ It is also supported in [FuseSoC](https://github.com/olofk/fusesoc) for quick si
         export PATH=$PATH:/home/$USER/uwatt/powerpc64le-power8--glibc--stable-2020.02-2/bin
         export CROSS_COMPILE=powerpc64le-linux-
         ```
-    4. Build Micropython
+    2. Build Micropython
        ```bash
         git clone https://github.com/micropython/micropython.git
         cd micropython/ports/powerpc
+        sudo apt install make
         make -j$(nproc)
         cd ../../../
        ```
-    5. Build GHDL from source
-       - Check if you have llvm installed with `which llvm-config`. 
-       If you see "... not found", install with `bash -c "$(wget -O - https://apt.llvm.org/llvm.sh)"`
+    3. Build GHDL from source
+       - Install LLVM, Clang, zlib
+       ```bash
+        sudo apt install llvm clang gnat zlib1g-dev
+       ``` 
        - Install gnat4.9 packages (needed by GHDL): 
        ```bash
         wget http://archive.ubuntu.com/ubuntu/pool/universe/g/gnat-4.9/gnat-4.9-base_4.9.3-3ubuntu5_amd64.deb
@@ -59,30 +65,32 @@ It is also supported in [FuseSoC](https://github.com/olofk/fusesoc) for quick si
         sudo dpkg -i ./gnat-4.9-base_4.9.3-3ubuntu5_amd64.deb
         sudo dpkg -i ./libgnat-4.9_4.9.3-3ubuntu5_amd64.deb
        ```
-       - Clone GHDL from GitHub
+       - Clone and build GHDL from GitHub
         (ideally you should go for a stable release, but v0.37 does not support llvm10, in which case you will need to specify older version of llvm above. The master branch doesn't seem to have this issue.) 
        ```bash 
        git clone https://github.com/ghdl/ghdl.git
        cd ghdl
+       mkdir -p /home/$USER/uwatt/ghdl_build
        mkdir build && cd build
        ../configure --with-llvm-config --prefix=/home/$USER/uwatt/ghdl_build
        make
        make install
+       cd ../../
        ```
        - If you face dependency issues, Google would mostly help. In case you realise that a package is not available in focal repositories, you can try the wget and deb method (similar to gnat above)
        - After building, add ghdl to path with 
        ```bash
-       export PATH=$PATH:/home/$USER/ghdl_build/bin
+       export PATH=$PATH:/home/$USER/uwatt/ghdl_build/bin
        ```
 
-    6. Build Microwatt
+    4. Build Microwatt
        ```bash
         git clone https://github.com/antonblanchard/microwatt
         cd microwatt
         make
        ```
 
-    7. Link Micropython image
+    5. Link Micropython image
     (note that here we are using pre-built image inside microwatt repository. At least on my system, I am not able to provide inputs to the micropython terminal with the image built above.
     This issue has been reported on microwatt GitHub - https://github.com/antonblanchard/microwatt/issues/246)
 
