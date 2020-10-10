@@ -26,6 +26,8 @@ It is also supported in [FuseSoC](https://github.com/olofk/fusesoc) for quick si
 
 - I was able to successfully get simulations running on Ubuntu 20.04 and decided to list down the steps here:
 - I also made ans ASCII cinema for this process - which completes this whole process in 8 mins! - https://asciinema.org/a/364414
+  [![asciicast](https://asciinema.org/a/364414.png)](https://asciinema.org/a/364414)
+  
 - (Note that if you are on a different Ubuntu release, there might be small changes needed here and there)
     Make a new directory wherever you like 
     ```bash
